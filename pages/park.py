@@ -50,7 +50,8 @@ with left_column:
 
     #chatGPT integration
     recommender = GeneralModel()
-    recommendation = recommender.model_prediction(title_text, api_key="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")
+    
+    recommendation = recommender.model_prediction(title_text, api_key=(st.secrets["api_key"]))
     print(recommendation)
 
 
