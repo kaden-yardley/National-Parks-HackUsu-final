@@ -61,7 +61,7 @@ with right_column:
     maxt = value[1]
     rain = st.select_slider(
         "Select how much precipitation you are comfortable with. Based on averages for the National Park",
-        options=['Low', 'Medium-Low', 'Medium', 'Medium-High', 'High'])
+        options=['Low', 'Medium-Low', 'Medium', 'Medium-High', 'High'], value="Medium")
     #st.write("Precipitation:", rain)
     st.header("The best 5 National Parks to visit this month")
     top_5 = parkAnalysis.best_parks(mint, maxt, rain)

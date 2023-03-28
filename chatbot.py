@@ -1,9 +1,15 @@
 import openai
+import datetime
 
-recommender_prompt_wrapper = """Write some recommendations for things to do for the following national park: 
+date = datetime.datetime.now().month
+
+recommender_prompt_wrapper = """Write me 5 recommendations for things to do for the following national park: 
 ---
 {input}
---- """
+--- 
+Please do it in bullet point form with no text before or after the bullet points
+also keep in mind that the month is {date} and that there might be weather restrictions due to this.
+"""
 
 def set_openai_key(key):
     """Sets OpenAI key."""
@@ -21,7 +27,7 @@ class GeneralModel:
 
         # arguments to send the API
         kwargs = {
-            "engine": "text-davinci-002",
+            "engine": "gpt-3.5-turbo",
             "temperature": 0.85,
             "max_tokens": 600,
             "best_of": 1,

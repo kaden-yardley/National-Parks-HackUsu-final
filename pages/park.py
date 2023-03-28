@@ -5,9 +5,10 @@ import plotly.graph_objs as go
 from chatbot import GeneralModel
 
 parkAnalysis = ParkAnalysis()
+name = st.experimental_get_query_params()["name"][0]
 
 st.set_page_config(
-    page_title="National Parks Too",
+    page_title= f'{parkAnalysis.get_pretty(name)} National Park',
     page_icon="random",
     layout="wide",)
 
@@ -27,7 +28,7 @@ dataset = st.container()
 left_column, right_column = st.columns([2, 1])
 
 
-name = st.experimental_get_query_params()["name"][0]
+
 title_text = parkAnalysis.get_pretty(name) + " National Park"
 with header:
     st.write(
