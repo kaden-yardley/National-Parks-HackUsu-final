@@ -3,12 +3,10 @@ import datetime
 
 
 
-recommender_prompt_wrapper = """Write me 5 recommendations for things to do for the following national park: 
----
+recommender_prompt_wrapper = """Write 5 recommendations for cool things to do for the following national park: 
 {input}
---- 
-Please do it in bullet point form with no text before or after the bullet points
-also keep in mind that the month is {date} and that there might be weather restrictions due to this.
+Please do it in bullet point form with no text before or after the bullet points,
+remember that the month is {date} and there might be weather restrictions due to this.
 """
 
 def set_openai_key(key):
