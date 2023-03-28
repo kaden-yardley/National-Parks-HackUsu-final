@@ -80,7 +80,7 @@ with right_column:
     #st.write("Temperature Range:", value)
     rain = st.select_slider(
         "Select how much precipitation you are comfortable with. Based on averages for the National Park",
-        options=['Low', 'Medium-Low', 'Medium', 'Medium-High', 'High'])
+        options=['Low', 'Medium-Low', 'Medium', 'Medium-High', 'High'], value='Medium')
     #st.write("Precipitation:", rain)
     mint = value[0]
     maxt = value[1]
