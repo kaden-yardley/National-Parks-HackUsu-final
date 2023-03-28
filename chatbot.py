@@ -43,7 +43,7 @@ class GeneralModel:
 
 
         r = openai.ChatCompletion.create(model= "gpt-3.5-turbo",
-  messages= [{"role": "user", "content": prompt}])["content"]
+  messages= [{"role": "user", "content": prompt}])["choices"][0]
         return r
 
     def model_prediction(self, input, api_key):
