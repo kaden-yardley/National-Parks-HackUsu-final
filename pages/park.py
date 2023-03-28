@@ -57,7 +57,7 @@ with left_column:
 
     recommendation = recommender.model_prediction(title_text, api_key=(st.secrets["api_key"]))
     log.info("RECO:")
-    log.info(recommendation)
+    log.info(recommendation["message"]["content"])
     print(recommendation)
 
 
