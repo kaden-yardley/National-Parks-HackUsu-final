@@ -8,7 +8,7 @@ recommender_prompt_wrapper = """Write me 5 recommendations for things to do for 
 {input}
 --- 
 Please do it in bullet point form with no text before or after the bullet points
-also keep in mind that the month is {date} and that there might be weather restrictions due to this.
+also keep in mind that the month is {current_date} and that there might be weather restrictions due to this.
 """
 
 def set_openai_key(key):
