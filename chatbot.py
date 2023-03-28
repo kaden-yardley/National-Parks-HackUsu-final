@@ -1,7 +1,7 @@
 import openai
 import datetime
 
-current_date = datetime.datetime.now().month
+
 
 recommender_prompt_wrapper = """Write me 5 recommendations for things to do for the following national park: 
 ---
@@ -47,11 +47,12 @@ class GeneralModel:
         ].strip()
         return r
 
-    def model_prediction(self, input, api_key, current_date=current_date):
+    def model_prediction(self, input, api_key):
         """
         wrapper for the API to save the prompt and the result
         """
+        current_date = datetime.datetime.now().month
         # Setting the OpenAI API key got from the OpenAI dashboard
         set_openai_key(api_key)
-        output = self.query(recommender_prompt_wrapper.format(input = input, current_date=current_date))
+        output = self.query(recommender_prompt_wrapper.format(input = input, date = current_date))
         return output
