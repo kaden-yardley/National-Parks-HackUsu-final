@@ -47,11 +47,11 @@ class GeneralModel:
         ].strip()
         return r
 
-    def model_prediction(self, input, api_key):
+    def model_prediction(self, input, api_key, current_date):
         """
         wrapper for the API to save the prompt and the result
         """
         # Setting the OpenAI API key got from the OpenAI dashboard
         set_openai_key(api_key)
-        output = self.query(recommender_prompt_wrapper.format(input = input, date=current_date))
+        output = self.query(recommender_prompt_wrapper.format(input = input, current_date=current_date))
         return output

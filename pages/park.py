@@ -1,10 +1,12 @@
 import streamlit as st
+import datetime
 from analysis import ParkAnalysis
 import pandas as pd
 import plotly.graph_objs as go
 from chatbot import GeneralModel
 
 parkAnalysis = ParkAnalysis()
+current_date = datetime.datetime.now().month
 name = st.experimental_get_query_params()["name"][0]
 
 st.set_page_config(
