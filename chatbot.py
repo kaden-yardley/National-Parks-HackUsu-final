@@ -27,7 +27,7 @@ class GeneralModel:
         # arguments to send the API
         kwargs = {
             "engine": "gpt-3.5-turbo",
-            "messages": prompt,
+            "messages": {"role": "user", "content": prompt},
             "temperature": 0.25,
             "max_tokens": 200,
             "best_of": 1,
