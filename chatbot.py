@@ -18,7 +18,6 @@ def set_openai_key(key):
 class GeneralModel:
     def __init__(self):
         print("Model Intilization--->")
-        # set_openai_key(API_KEY)
 
     def query(self, prompt, myKwargs={}):
         """
@@ -28,8 +27,9 @@ class GeneralModel:
         # arguments to send the API
         kwargs = {
             "engine": "gpt-3.5-turbo",
-            "temperature": 0.85,
-            "max_tokens": 600,
+            "messages": prompt,
+            "temperature": 0.25,
+            "max_tokens": 200,
             "best_of": 1,
             "top_p": 1,
             "frequency_penalty": 0,
@@ -42,7 +42,7 @@ class GeneralModel:
             kwargs[kwarg] = myKwargs[kwarg]
 
 
-        r = openai.Completion.create(prompt=prompt, **kwargs)["choices"][0][
+        r = openai.ChatCompletion.create(**kwargs)["choices"][0][
             "text"
         ].strip()
         return r
