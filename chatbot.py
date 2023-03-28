@@ -42,9 +42,8 @@ class GeneralModel:
             kwargs[kwarg] = myKwargs[kwarg]
 
 
-        r = openai.ChatCompletion.create(**kwargs)["choices"][0][
-            "text"
-        ].strip()
+        r = openai.ChatCompletion.create(engine= "gpt-3.5-turbo",
+            messages = {"role": "user", "content": prompt})["choices"][0]
         return r
 
     def model_prediction(self, input, api_key):
