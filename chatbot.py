@@ -1,55 +1,32 @@
 import openai
 import datetime
 
+# Prompt template for generating park recommendations
+recommender_prompt_wrapper = """\
+Write 5 recommendations for cool things to do for the following national park:\n{input}\nPlease do it in bullet point form with no text before or after the bullet points,\nremember that the month is {date} and there might be weather restrictions due to this.\n"""
 
-
-recommender_prompt_wrapper = """Write 5 recommendations for cool things to do for the following national park: 
-{input}
-Please do it in bullet point form with no text before or after the bullet points,
-remember that the month is {date} and there might be weather restrictions due to this.
-"""
-
-def set_openai_key(key):
-    """Sets OpenAI key."""
+def set_openai_key(key: str):
+    """Sets the OpenAI API key."""
     openai.api_key = key
 
 class GeneralModel:
     def __init__(self):
-        print("Model Intilization--->")
+        print("Model Initialization...")
 
-    def query(self, prompt, myKwargs={}):
-        """
-        wrapper for the API to save the prompt and the result
-        """
+    def query(self, prompt: str):
+        """Calls the ChatCompletion API in a simple manner, similar to OpenAI docs."""
+        completion = openai.ChatCompletion.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": prompt}
+            ]
+        )
+        return completion.choices[0].message["content"]
 
-        # arguments to send the API
-        kwargs = {
-            "engine": "gpt-3.5-turbo",
-            "messages": {"role": "user", "content": prompt},
-            "temperature": 0.25,
-            "max_tokens": 200,
-            "best_of": 1,
-            "top_p": 1,
-            "frequency_penalty": 0,
-            "presence_penalty": 0,
-            "stop": ["###"],
-        }
-
-
-        for kwarg in myKwargs:
-            kwargs[kwarg] = myKwargs[kwarg]
-
-
-        r = openai.ChatCompletion.create(model= "gpt-3.5-turbo",
-  messages= [{"role": "user", "content": prompt}])["choices"][0]
-        return r
-
-    def model_prediction(self, input, api_key):
-        """
-        wrapper for the API to save the prompt and the result
-        """
-        current_date = datetime.datetime.now().month
-        # Setting the OpenAI API key got from the OpenAI dashboard
+    def model_prediction(self, input_text: str, api_key: str) -> str:
+        """Generates 5 recommendations for activities to do in a specific park, using a simplified approach."""
+        current_month = datetime.datetime.now().month
         set_openai_key(api_key)
-        output = self.query(recommender_prompt_wrapper.format(input = input, date = current_date))
-        return output
+        prompt = recommender_prompt_wrapper.format(input=input_text, date=current_month)
+        return self.query(prompt)
