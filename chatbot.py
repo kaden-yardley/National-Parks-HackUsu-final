@@ -14,7 +14,7 @@ class GeneralModel:
         print("Model Initialization...")
 
     def query(self, prompt: str):
-        """Calls the ChatCompletion API in a simple manner, similar to OpenAI docs."""
+        """Calls the ChatCompletion API in a manner that returns a dict with 'message' content."""
         completion = openai.ChatCompletion.create(
             model="gpt-4o-mini",
             messages=[
@@ -22,11 +22,16 @@ class GeneralModel:
                 {"role": "user", "content": prompt}
             ]
         )
-        return completion.choices[0].message["content"]
+        # Return the first choice, which includes the 'message' dict
+        return completion["choices"][0]
 
-    def model_prediction(self, input_text: str, api_key: str) -> str:
-        """Generates 5 recommendations for activities to do in a specific park, using a simplified approach."""
-        current_month = datetime.datetime.now().month
+    def model_prediction(self, input_text: str, api_key: str) -> dict:
+        """Generates 5 recommendations for activities to do in a specific park, returning dict structure."""
+        # Set the OpenAI API key
         set_openai_key(api_key)
+        # Get current month
+        current_month = datetime.datetime.now().month
+        # Format the prompt
         prompt = recommender_prompt_wrapper.format(input=input_text, date=current_month)
+        # Query the model
         return self.query(prompt)
