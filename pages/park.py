@@ -68,7 +68,7 @@ with left_column:
     # #df = pd.DataFrame({'Number of visitors': av})
     #                       #, months[1]: av[1], months[2]: av[2],months[3]: av[3], months[4]: av[4], months[5]: av[5], months[6]: av[6], months[7]: av[7], months[8]: av[8], months[9]: av[9], months[10]: av[10], months[11]: av[11]})
     # st.line_chart(av[1:])
-    st.write("Here are some recommendations provided by GPT from OpenAI:")
+    st.write("Here are some current recommendations on what to do, provided by OpenAI:")
     st.write(recommendation["message"]["content"])
     st.write("https://www.nps.gov/" + name + "/index.htm")
 
