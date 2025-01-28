@@ -3,7 +3,7 @@ import datetime
 
 # Prompt template for generating park recommendations
 recommender_prompt_wrapper = """\
-Write 5 recommendations for cool things to do for the following national park:\n{input}\nPlease do it in bullet point form with no text before or after the bullet points,\nremember that the month is {date} and there might be weather restrictions due to this.\n"""
+Write 5 recommendations for cool things to do for the following national park:\n{input}\nPlease do it in bullet point form with no text before or after the bullet points,\nremember that the month is {date} and there might be weather restrictions due to this. Please include a note after the bullet points to always check current conditions for closures.\n"""
 
 def set_openai_key(key: str):
     """Sets the OpenAI API key."""
